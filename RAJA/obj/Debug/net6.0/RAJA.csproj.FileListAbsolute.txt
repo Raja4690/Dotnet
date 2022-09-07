@@ -1,0 +1,15 @@
+D:\my fies\RAJA\bin\Debug\net6.0\RAJA.exe
+D:\my fies\RAJA\bin\Debug\net6.0\RAJA.deps.json
+D:\my fies\RAJA\bin\Debug\net6.0\RAJA.runtimeconfig.json
+D:\my fies\RAJA\bin\Debug\net6.0\RAJA.dll
+D:\my fies\RAJA\bin\Debug\net6.0\RAJA.pdb
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.csproj.AssemblyReference.cache
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.GeneratedMSBuildEditorConfig.editorconfig
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.AssemblyInfoInputs.cache
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.AssemblyInfo.cs
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.csproj.CoreCompileInputs.cache
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.dll
+D:\my fies\RAJA\obj\Debug\net6.0\refint\RAJA.dll
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.pdb
+D:\my fies\RAJA\obj\Debug\net6.0\RAJA.genruntimeconfig.cache
+D:\my fies\RAJA\obj\Debug\net6.0\ref\RAJA.dll
