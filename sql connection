@@ -1,0 +1,125 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+using System.Configuration;
+using System.Net;
+using System.Text;
+
+public partial class LinqExample : Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        groupByExampleOdDataset();
+    }
+
+    private void joinsExample()
+    {
+
+    }
+
+    private void groupByExampleOdDataset()
+    {
+        DataTable employees = fetchData();
+
+        if (employees != null)
+        {
+            var groups = from emp in employees.AsEnumerable()
+                         group emp by emp.Field<string>("JobTitle");
+
+            int count = groups.Count();
+
+            Console.WriteLine("Total groups found are {0}", count);
+            StringBuilder builder = new StringBuilder();
+
+            string stable ;
+            foreach (var group in groups)
+            {
+                stable = "<table  border=1>";
+                string groupHeader = "<tr><td colspan=16> Group Data {0} " + group.Key + "</td></tr><tr>";
+
+                builder.Append("<br><br>");
+                builder.Append(stable);
+                builder.Append(groupHeader);
+                foreach (var emp in group)
+                {
+                    for (int i = 0; i < emp.ItemArray.Length; i++)
+                    {
+                        builder.Append("<td> " + emp.ItemArray[i].ToString() + "</td>");
+                    }
+                    builder.Append("</tr>");               
+                }
+                builder.Append("</table>");
+            }
+
+            stable = builder.ToString();
+
+            dvPlaceholder.InnerHtml = stable;
+        }
+    }
+
+    private void example()
+    {
+        DataTable employee = fetchData();
+
+        if (employee != null)
+        {
+            var filteredEmp = from emp in employee.AsEnumerable()
+                              where emp.Field<string>("JobTitle").Contains("Designer")
+                              select emp;
+
+            string stable = "<Table border=1>";
+
+            foreach (DataRow emp in filteredEmp)
+            {
+                stable += "<tr>";
+
+                for (int i = 0; i < emp.ItemArray.Length; i++)
+                {
+                    stable += "<td> " + emp.ItemArray[i].ToString() + "</td>";
+                }
+
+                stable += "</tr>";
+            }
+
+            dvPlaceholder.InnerHtml = stable;
+
+            stable += "</table>";
+
+        }
+
+    }
+    private  DataTable fetchData()
+    {
+        SqlConnection scon;
+        SqlDataAdapter dbAdapter;
+        DataTable dt = new DataTable("employee");
+        string constring = "Data Source=DESKTOP-NDBFL3P;Initial Catalog=AdventureWorks2019;Persist Security Info=True;User ID=sa;Password=123456";
+
+        using (scon = new SqlConnection(constring))
+        {
+            scon.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "Select [BusinessEntityID], " +
+                "[NationalIDNumber], [LoginID], [JobTitle], [BirthDate], [MaritalStatus], [Gender], [HireDate], [SalariedFlag], " +
+                "[VacationHours], [SickLeaveHours], [CurrentFlag], [rowguid], [ModifiedDate] " +
+                "from HumanResources.Employee";
+
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Connection = scon;
+
+            dbAdapter = new SqlDataAdapter(cmd);
+
+            dbAdapter.Fill(dt);
+        }
+
+        return dt;
+    }
+}
